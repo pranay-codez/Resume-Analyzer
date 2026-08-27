@@ -51,9 +51,6 @@ class ResumeAnalyzer:
             """
         prompt += "context :\n" + context + "\n"
         prompt += "task :\n" + task + "\n"
-        if prompt.strip() == "":
-            prompt = """You are a resume analyzer. Your task is to analyze the provided resume text and provide a structured assessment based on the given context, task, and output format. 
-            """
         prompt += "constraint :\n" + constraint + "\n"
         prompt += "output_format :\n" + output_format + "\n"
         prompt += "example_output :\n" + example_output + "\n"
@@ -63,10 +60,9 @@ class ResumeAnalyzer:
     
     def obtain_file_path(self, filename):
         try:
-            pdf_dir = os.path.dirname(os.path.abspath(__file__))
-            pdf_path = os.path.join(pdf_dir, filename)
+            pdf_path = os.path.abspath(filename)
             if not os.path.exists(pdf_path):
-                raise FileNotFoundError(f"The file '{filename}' does not exist.")
+                raise FileNotFoundError(f"The file '{filename}' does not exist.\n Make sure to provide the correct path or place the file in the same directory as this script.")
             return pdf_path
         except FileNotFoundError as e:
             print(e)
